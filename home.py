@@ -36,7 +36,7 @@ with col1:
                    
     """, unsafe_allow_html=True)
 
-st.divider() # Горизонтальная черта
+st.divider() 
 
 st.header("Разработчик")
 col1, col2 = st.columns([0.4, 0.8], gap="large")
