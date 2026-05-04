@@ -43,6 +43,7 @@ col1, col2 = st.columns([0.4, 0.8], gap="large")
 with col1:
     st.image(f'./images/me.jpg')
 
+github_url = "https://github.com/ari-ira17"
 with col2:
 
     st.markdown(f""" 
@@ -56,3 +57,13 @@ with col2:
 
                 **Специальность:** 02.03.03 Математическое обеспечение и администрирование информационных систем
 """)
+    
+    st.markdown(
+    f"""
+    <a href="{github_url}" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" 
+             width="25" height="25">
+    </a>
+    """,
+    unsafe_allow_html=True
+)
