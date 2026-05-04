@@ -1,5 +1,8 @@
 import streamlit as st
 import pandas as pd
+from pathlib import Path
+ROOT_DIR = Path(__file__).resolve().parent.parent
+IMAGES_DIR = ROOT_DIR / "images"
 
 st.title("Информация о наборе данных")
 
@@ -11,7 +14,7 @@ st.markdown("""
 **Целевая переменная** — `price`
 """, unsafe_allow_html=True)
 
-# ---- Признаки ----
+
 def type_badge(dtype):
     if "float" in dtype:
         return ":blue-badge[float64]"
@@ -85,10 +88,6 @@ st.write("""
 - создание Mind Map
 """)
 
-from pathlib import Path
-ROOT_DIR = Path(__file__).resolve().parent.parent
-IMAGES_DIR = ROOT_DIR / "images"
-
 col1, col2 = st.columns(2)
 
 with col1:
@@ -98,18 +97,26 @@ with col1:
     )
 
 with col2:
+    # Добавляем отступ сверху для центрирования
+    st.markdown("<br>", unsafe_allow_html=True)  # отступ
     st.image(
         str(IMAGES_DIR / "mind_map.png"), 
-        caption="Mind Map"
+        caption="Mind Map",
     )
 
 st.subheader("📈 EDA")
 
 st.write("""
-В ходе анализа были выявлены следующие закономерности:
-- цена сильно зависит от веса (`carat`)
-- более высокая огранка увеличивает стоимость
-- цвет и чистота также влияют на цену, но слабее
+В ходе анализа были проведены следующие операции:
+- обработка пропущенных значений
+- коррекция типов данных с целью экономии памяти 
+- кодирование категориальных признаков `color`, `clarity`
+- удаление дубликатов
+- обработка выбросов
+- построение корреляционной матрицы Спирмена
+- замена сильно коррелирующих признаков `x`, `y`, `z` на `radius`
 """)
 
-
+st.subheader("✅ Обработанные данные")
+df = pd.read_csv("./data/diamonds_filtered.csv")
+st.dataframe(df.head())
