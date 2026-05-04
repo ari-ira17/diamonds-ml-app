@@ -97,8 +97,7 @@ with col1:
     )
 
 with col2:
-    # Добавляем отступ сверху для центрирования
-    st.markdown("<br>", unsafe_allow_html=True)  # отступ
+    st.markdown("<br>", unsafe_allow_html=True) 
     st.image(
         str(IMAGES_DIR / "mind_map.png"), 
         caption="Mind Map",
