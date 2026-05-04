@@ -1661,6 +1661,21 @@ snowflake = ["snowflake-connector-python (>=3.3.0)", "snowflake-snowpark-python[
 sql = ["SQLAlchemy (>=2.0.0)"]
 
 [[package]]
+name = "tabulate"
+version = "0.10.0"
+description = "Pretty-print tabular data"
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "tabulate-0.10.0-py3-none-any.whl", hash = "sha256:f0b0622e567335c8fabaaa659f1b33bcb6ddfe2e496071b743aa113f8774f2d3"},
+    {file = "tabulate-0.10.0.tar.gz", hash = "sha256:e2cfde8f79420f6deeffdeda9aaec3b6bc5abce947655d17ac662b126e48a60d"},
+]
+
+[package.extras]
+widechars = ["wcwidth"]
+
+[[package]]
 name = "tenacity"
 version = "9.1.4"
 description = "Retry code until it succeeds"
@@ -1867,4 +1882,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.13"
-content-hash = "5ee825dae1c59323e58a5ad3063aacf0363cb70d5ac1221314b4769e4f972594"
+content-hash = "acaa21186c55543f62e1b67a04c69d2c52a4862f130302e173dc1fee63157b6c"
