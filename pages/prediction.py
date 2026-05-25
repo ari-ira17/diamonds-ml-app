@@ -12,12 +12,11 @@ color_mapping = {"D": 0, "E": 1, "F": 2, "G": 3, "H": 4, "I": 5, "J": 6}
 clarity_mapping = {"I1": 0, "IF": 1, "SI1": 2, "SI2": 3, "VS1": 4, "VS2": 5, "VVS1": 6, "VVS2": 7}
 
 MODEL_PATHS = {
-    "Модель 1 (Polynomial)": "models/polynomial_reg_model_1.pkl",
-    "Модель 2 (Boosting)": "models/boosting_reg_model_2.pkl",
-    "Модель 3 (CatBoost)": "models/catboost_reg_model_3.pkl",
-    "Модель 4 (Bagging)": "models/bagging_reg_model_4.pkl",
-    "Модель 5 (Stacking K-Best)": "models/stacking_reg_model_5.pkl",
-    "Модель 6 (MLP K-Best)": "models/mlp_optuna_reg_model_6.pkl"
+    "Модель 1 (Boosting)": "models/boosting_reg_model_2.pkl",
+    "Модель 2 (CatBoost)": "models/catboost_reg_model_3.pkl",
+    "Модель 3 (Bagging)": "models/bagging_reg_model_4.pkl",
+    "Модель 4 (Stacking K-Best)": "models/stacking_reg_model_5.pkl",
+    "Модель 5 (MLP K-Best)": "models/mlp_optuna_reg_model_6.pkl"
 }
 
 @st.cache_resource
@@ -32,7 +31,7 @@ st.title("💎 Оценка стоимости бриллианта")
 selected_model_names = st.multiselect(
     "Выберите модели для сравнения:",
     options=list(MODEL_PATHS.keys()),
-    default=["Модель 1 (Polynomial)"]
+    default=["Модель 1 (Boosting)"]
 )
 
 st.divider()
@@ -42,7 +41,6 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown("### 📏 Физические параметры")
     carat = st.number_input("Вес (carat)", min_value=0.1, max_value=5.0, value=0.7, step=0.01)
-    # Пользователь вводит радиус напрямую, как в твоем датасете
     radius = st.number_input("Радиус (radius, мм)", min_value=1.0, max_value=15.0, value=5.5)
     depth = st.number_input("Глубина (depth, %)", min_value=40.0, max_value=80.0, value=61.0)
     table = st.number_input("Площадка (table, %)", min_value=40.0, max_value=95.0, value=57.0)
@@ -76,7 +74,10 @@ if st.button("🚀 Рассчитать стоимость", type="primary", use
             model = load_model(MODEL_PATHS[name])
             if model:
                 try:
-                    final_input = full_df[FEATURES_ALL]
+                    if "K-Best" in name and name != "Модель 4 (Stacking K-Best)":
+                        final_input = full_df[KBEST_FEATURES]
+                    else:
+                        final_input = full_df[FEATURES_ALL]
                     
                     prediction = model.predict(final_input)[0]
 
