@@ -4,6 +4,12 @@ import joblib
 import os
 import numpy as np
 
+from sklearn.preprocessing import StandardScaler, PolynomialFeatures, LabelEncoder
+from sklearn.feature_selection import SelectKBest
+from sklearn.ensemble import StackingRegressor, BaggingRegressor, GradientBoostingRegressor
+from sklearn.neural_network import MLPRegressor
+from catboost import CatBoostRegressor
+
 FEATURES_ALL = ['carat', 'cut', 'color', 'clarity', 'depth', 'table', 'radius']
 KBEST_FEATURES = ['carat', 'color', 'clarity', 'radius'] 
 
